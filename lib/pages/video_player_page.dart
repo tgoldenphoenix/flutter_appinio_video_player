@@ -20,9 +20,6 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   // This work ok
   // String videoUri = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
-  // fpt trong dai dich COVID
-  // Uri videoUri = Uri.parse("https://youtu.be/0zdBWjWO5UE?si=tfNkYgkR_JpdqX3m");
-
   // tot nghiep fpt
   String videoUri = "https://dn720300.ca.archive.org/0/items/watch-rocky-online-putlockers-2023-07-10-16-29-22/Watch%20Rocky%20Online%20-%20Putlockers_2023-07-10_16-29-22.mp4";
 
@@ -39,7 +36,13 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:Column(
+      body:isLoading
+          ? const Center(
+            child: CircularProgressIndicator(
+              color: Colors.red,
+            ),
+          )
+          :Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -93,20 +96,24 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   }
 
   void initializeVideoPlayer(Source source) {
+    setState(() {
+      isLoading = true;
+    });
+
     CachedVideoPlayerController _videoPlayerController;
 
     if (source == Source.Asset) {
       _videoPlayerController = CachedVideoPlayerController.asset(assetVideoPath)
         ..initialize().then((value) {
           setState(() {
-
+            isLoading = false;
           });
         });
     } else if (source == Source.Network) {
       _videoPlayerController = CachedVideoPlayerController.network(videoUri)
         ..initialize().then((value) {
           setState(() {
-            // isLoading = false;
+            isLoading = false;
           });
         });
     } else {
