@@ -20,7 +20,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   // This work ok
   // String videoUri = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
-  // tot nghiep fpt
+  // Rocky on internet arhive
   String videoUri = "https://dn720300.ca.archive.org/0/items/watch-rocky-online-putlockers-2023-07-10-16-29-22/Watch%20Rocky%20Online%20-%20Putlockers_2023-07-10_16-29-22.mp4";
 
   String assetVideoPath = "assets/videos/rick-roll.mp4";
@@ -48,13 +48,14 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomVideoPlayer(customVideoPlayerController: _customVideoPlayerController),
+
             _sourceButtons(),
           ]
       )
     );
   }
 
-  // which source to load the video from
+  // To choose which source user want to load the video from
   Widget _sourceButtons() {
     return Row(
       mainAxisSize: MainAxisSize.max,
@@ -100,6 +101,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
       isLoading = true;
     });
 
+    //
     CachedVideoPlayerController _videoPlayerController;
 
     if (source == Source.Asset) {
